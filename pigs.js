@@ -6,7 +6,6 @@ class pig{
   }
   roll = function(){
     outcome = Math.random();
-    console.log(outcome);
     if (outcome >= 0 && outcome <= 0.349){
       this.state = "No Dot";
     } else if (outcome > 0.349 && outcome <= 0.651){
@@ -23,7 +22,8 @@ class pig{
 
   }
   show = function(){
-    circle(this.pos.x,this.pos.y,80)
+    circle(this.pos.x,this.pos.y,width*(4/25))
+    textSize(width/50);
     text(this.state, this.pos.x, this.pos.y)
     textAlign(CENTER, CENTER);
   }
