@@ -3,6 +3,9 @@ class pig{
   constructor(x,y,state){
     this.pos = createVector(x,y);
     this.state = state;
+    this.vel = createVector(0,0);
+    this.diameter = width*(4/25)
+    this.radius = this.diameter/2
   }
   roll = function(){
     outcome = Math.random();
@@ -19,12 +22,31 @@ class pig{
     } else {
       this.state = "Leaning jowler"
     }
+    this.vel.set([random(-10,10),random(-10,10)]);
 
   }
   show = function(){
-    circle(this.pos.x,this.pos.y,width*(4/25))
+    this.pos.add(this.vel)
+    circle(this.pos.x,this.pos.y,this.diameter)
+    this.vel.mult(0.99)
     textSize(width/50);
     text(this.state, this.pos.x, this.pos.y)
     textAlign(CENTER, CENTER);
+
+    if (this.pos.x < -width/2 + this.radius){
+      this.pos.x = -width/2 + this.radius;
+      this.vel.x = Math.abs(this.vel.x);
+    }else if (this.pos.x > width/2 - this.radius){
+      this.pos.x = width/2 - this.radius;
+      this.vel.x = -Math.abs(this.vel.x) ;
+    }
+
+    if (this.pos.y < -height/2 + this.radius){
+      this.pos.y = -height/2 + this.radius;
+      this.vel.y = Math.abs(this.vel.y);
+    }else if (this.pos.y >= height/2 - this.radius){
+      this.pos.y = height/2 - this.radius;
+      this.vel.y = -Math.abs(this.vel.y);
+    }
   }
 }

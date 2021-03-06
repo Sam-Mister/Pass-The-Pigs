@@ -5,9 +5,10 @@ let RunningTotal = 0;
 let CurrentRound = 0;
 let Button1;
 let ScoreKeeper = new Scorer();
+let MakingBacon = false;
 
 function setup() {
-  cnv = createCanvas(1000, 1000)
+  cnv = createCanvas(1000, 950)
   Pigs.push(new pig(-width/10,0,"Dot"))
   Pigs.push(new pig(width/10,0,"Dot"))
 
@@ -23,14 +24,12 @@ function setup() {
     }else {
       CurrentRound += ScoreOfCurrentConfig;
     }
-    console.log(CurrentRound);
   })
   Button1 = createButton("Save Score");
   Button1.position(width*(27/50),width*(33/50))
   Button1.mousePressed(function(){
     RunningTotal += CurrentRound;
     CurrentRound = 0;
-    console.log(RunningTotal);
   }
 );
 }
@@ -47,4 +46,11 @@ function draw() {
   text("Current Score:" + CurrentRound, width*(7/50) , -(width)*(4/25))
   textSize(width / 20);
   text("Pass The Pigs", 0, -height/4)
+
+  MakingBacon = ScoreKeeper.AreOverlapping(Pigs)
+  if (MakingBacon == true){
+    RunningTotal = 0;
+    CurrentRound = 0;
+    text("MAKING BACON", 0,0)
+  }
 }

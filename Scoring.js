@@ -1,4 +1,5 @@
 let Score;
+let distance;
 let Values = {"No Dot":0, "Dot" : 0, "Razorback" : 5, "Trotter": 5, "Snouter" : 10, "Leaning jowler" : 15};
 class Scorer {
   constructor(){
@@ -16,5 +17,13 @@ class Scorer {
       Score = Values[pigs[0].state] + Values[pigs[1].state]
     }
     return Score;
+  }
+  AreOverlapping = function(pigs){
+    distance = pigs[0].pos.dist(pigs[1].pos)
+    if (distance < (pigs[0].radius + pigs[1].radius) && pigs[0].vel.mag() < 0.05 && pigs[1].vel.mag() < 0.05){
+      return true
+    }else{
+      return false
+    }
   }
 }
