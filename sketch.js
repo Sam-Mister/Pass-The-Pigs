@@ -6,14 +6,15 @@ let CurrentRound = 0;
 let Button1;
 let ScoreKeeper = new Scorer();
 let MakingBacon = false;
+let ratio = window.screen.availWidth /  window.screen.availHeight
 
 function setup() {
-  cnv = createCanvas(1000, 950)
+  cnv = createCanvas(window.screen.availWidth-20, window.screen.availHeight-(50*ratio))
   Pigs.push(new pig(-width/10,0,"Dot"))
   Pigs.push(new pig(width/10,0,"Dot"))
 
   Button = createButton("Roll");
-  Button.position(width*(37/100),width*(33/50))
+  Button.position(width*(2/5),height*(4/5))
   Button.mousePressed(function (){
     for(var i = 0; i < Pigs.length; i++){
       Pigs[i].roll();
@@ -25,8 +26,8 @@ function setup() {
       CurrentRound += ScoreOfCurrentConfig;
     }
   })
-  Button1 = createButton("Save Score");
-  Button1.position(width*(27/50),width*(33/50))
+  Button1 = createButton("Save");
+  Button1.position(width*(3/5),height*(4/5))
   Button1.mousePressed(function(){
     RunningTotal += CurrentRound;
     CurrentRound = 0;
@@ -42,10 +43,10 @@ function draw() {
   }
   textSize(width / 30);
   textAlign(CENTER, CENTER);
-  text("Total:" + RunningTotal, -width/10,-(width)*(4/25));
-  text("Current Score:" + CurrentRound, width*(7/50) , -(width)*(4/25))
+  text("Total:" + RunningTotal, -width/10,-(height)*(1/5));
+  text("Current Score:" + CurrentRound, width*(3/20) , -(height)*(1/5))
   textSize(width / 20);
-  text("Pass The Pigs", 0, -height/4)
+  text("Pass The Pigs", 0, -height/3)
 
   MakingBacon = ScoreKeeper.AreOverlapping(Pigs)
   if (MakingBacon == true){

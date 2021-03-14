@@ -2,8 +2,7 @@ let Score;
 let distance;
 let Values = {"No Dot":0, "Dot" : 0, "Razorback" : 5, "Trotter": 5, "Snouter" : 10, "Leaning jowler" : 15};
 class Scorer {
-  constructor(){
-  }
+  constructor() {}
   getScore = function(pigs){
     if(pigs[0].state == "No Dot" && pigs[1].state == "Dot" || pigs[1].state == "No Dot" && pigs[0].state == "Dot"){
       Score = "Pig Out"

@@ -1,4 +1,5 @@
 let outcome;
+let scaler = 0.2;
 class pig{
   constructor(x,y,state){
     this.pos = createVector(x,y);
@@ -22,13 +23,13 @@ class pig{
     } else {
       this.state = "Leaning jowler"
     }
-    this.vel.set([random(-10,10),random(-10,10)]);
+    this.vel.set([random(-scaler*this.diameter,scaler*this.diameter),random(-scaler*this.diameter,scaler*this.diameter)]);
 
   }
   show = function(){
     this.pos.add(this.vel)
     circle(this.pos.x,this.pos.y,this.diameter)
-    this.vel.mult(0.99)
+    this.vel.mult(0.98)
     textSize(width/50);
     text(this.state, this.pos.x, this.pos.y)
     textAlign(CENTER, CENTER);
